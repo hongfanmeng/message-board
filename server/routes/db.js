@@ -1,9 +1,16 @@
 const { MongoClient, ObjectID } = require("mongodb");
 let db;
 const uri =
+  //usa
   "mongodb://user:user@cluster0-shard-00-00-zzkjj.mongodb.net:27017,cluster0-shard-00-01-zzkjj.mongodb.net:27017,cluster0-shard-00-02-zzkjj.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority";
+//"abc";
 module.exports = async () => {
-  let client = await MongoClient.connect(uri);
+  let client;
+  try {
+    client = await MongoClient.connect(uri);
+  } catch (err) {
+    throw err.message;
+  }
   db = client.db("myposts");
 };
 
