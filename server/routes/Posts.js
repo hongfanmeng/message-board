@@ -1,5 +1,5 @@
 const db = require("./db");
-
+const { ObjectID } = require("mongodb");
 module.exports = {
   async delPost(req, res) {
     await db();
@@ -16,8 +16,10 @@ module.exports = {
   },
   async addPost(req, res) {
     await db();
-    post = req.body;
-    //check post illegal or not
+    post = {
+      username: req.body.username,
+      article: req.body.article,
+    };
     user = await db.Users.queryUser(post.username);
     if (!user)
       (request = await db.Users.addUser(post.username)),
